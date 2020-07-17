@@ -16,6 +16,14 @@ from django_auth_ldap.config import LDAPSearch, LDAPSearchUnion
 
 ldap.set_option(ldap.OPT_X_TLS_CACERTFILE, os.getcwd() + "/certificate.pem")
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {"django_auth_ldap": {"level": "DEBUG", "handlers": ["console"]}},
+}
+ldap.set_option(ldap.OPT_DEBUG_LEVEL, 4095)
+
 AUTH_LDAP_SERVER_URI = os.environ.get('LDAP_HOST')
 AUTH_LDAP_USER_SEARCH = LDAPSearchUnion(
     LDAPSearch("ou=people,o=unal.edu.co",
@@ -33,7 +41,6 @@ AUTH_LDAP_USER_SEARCH = LDAPSearchUnion(
 AUTH_LDAP_ALWAYS_UPDATE_USER = False
 AUTHENTICATION_BACKENDS = (
     'django_auth_ldap.backend.LDAPBackend',
-    'django.contrib.auth.backends.ModelBackend',
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
