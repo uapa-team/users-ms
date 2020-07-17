@@ -11,6 +11,30 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import ldap
+from django_auth_ldap.config import LDAPSearch, LDAPSearchUnion
+
+ldap.set_option(ldap.OPT_X_TLS_CACERTFILE, os.getcwd() + "/certificate.pem")
+
+AUTH_LDAP_SERVER_URI = os.environ.get('LDAP_HOST')
+AUTH_LDAP_USER_SEARCH = LDAPSearchUnion(
+    LDAPSearch("ou=people,o=unal.edu.co",
+               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+    LDAPSearch("ou=institucional,o=bogota,o=unal.edu.co",
+               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+    LDAPSearch("ou=dependencia,o=bogota,o=unal.edu.co",
+               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+    LDAPSearch("ou=Institucional,o=bogota,o=unal.edu.co",
+               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+    LDAPSearch("ou=Dependencia,o=bogota,o=unal.edu.co",
+               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+)
+
+AUTH_LDAP_ALWAYS_UPDATE_USER = False
+AUTHENTICATION_BACKENDS = (
+    'django_auth_ldap.backend.LDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
