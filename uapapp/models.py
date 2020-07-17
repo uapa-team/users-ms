@@ -18,10 +18,10 @@ class Dependencia(models.Model):
         ]
 
 
-class Programa (models.Model):
+class Programa(models.Model):
     nombre = models.CharField(max_length=60)
     dependencia = models.ForeignKey("Dependencia", on_delete=models.PROTECT)
-    tipo = models.CharField(max_length=3, choices=TIPOS)
+    tipo = models.CharField(max_length=3, choices=TIPOS, default="PRE")
 
     def __str__(self):
         return self.nombre
