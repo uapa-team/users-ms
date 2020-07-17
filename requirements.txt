@@ -1,7 +1,4 @@
 Django
-<<<<<<< HEAD
 django-auth-ldap
-=======
 djangorestframework
 djangorestframework-simplejwt
->>>>>>> develop
