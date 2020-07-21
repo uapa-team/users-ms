@@ -1,0 +1,116 @@
+[
+  {
+    "model": "uapapp.Dependencia",
+    "pk": 1,
+    "fields": {
+      "nombre": "Área curricular de ingniería civil y agrícola"
+    }
+  },
+  {
+    "model": "uapapp.Dependencia",
+    "pk": 2,
+    "fields": {
+      "nombre": "Área curricular de ingniería química y ambiental"
+    }
+  },
+  {
+    "model": "uapapp.Dependencia",
+    "pk": 3,
+    "fields": {
+      "nombre": "Área curricular de ingniería mecánica y mecatrónica"
+    }
+  },
+  {
+    "model": "uapapp.Dependencia",
+    "pk": 4,
+    "fields": {
+      "nombre": "Área curricular de ingniería eléctrica y electrónica"
+    }
+  },
+  {
+    "model": "uapapp.Dependencia",
+    "pk": 5,
+    "fields": {
+      "nombre": "Área curricular de ingniería sistemas e industrial"
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería Civil",
+      "tipo": "",
+      "dependencia_id": 1
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería Agrícola",
+      "tipo": "",
+      "dependencia_id": 1
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería Química",
+      "tipo": "",
+      "dependencia_id": 2
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería Mecánica",
+      "tipo": "",
+      "dependencia_id": 3
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería Mecatrónica",
+      "tipo": "",
+      "dependencia_id": 3
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería Eléctrica",
+      "tipo": "",
+      "dependencia_id": 4
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería Electrónica",
+      "tipo": "",
+      "dependencia_id": 4
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería de Sistemas y Computación",
+      "tipo": "",
+      "dependencia_id": 5
+    }
+  },
+  {
+    "model": "uapapp.Programa",
+    "fields": {
+      "nombre": "Ingeniería Industrial",
+      "tipo": "",
+      "dependencia_id": 5
+    }
+  },
+  {
+    "model": "auth_group",
+    "pk": 1,
+    "fields": {
+      "name": "UAPA - Administradores"
+    }
+  }
+]

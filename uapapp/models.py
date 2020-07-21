@@ -1,8 +1,8 @@
 from django.db import models
 
 TIPOS = [
-    ("Pre", "Pregrado"),
-    ("Pos", "Posgrado"),
+    ("pre", "Pregrado"),
+    ("pos", "Posgrado")
 ]
 
 class Dependencia(models.Model):
@@ -12,21 +12,23 @@ class Dependencia(models.Model):
         return self.nombre
 
     class Meta:
+        db_table = "Dependencia"
         permissions = [
             ("pre", "Puede descargar reportes de pregrado."),
-            ("pos", "Puede descargar reportes de posgrado."),
+            ("pos", "Puede descargar reportes de posgrado.")
         ]
 
 
 class Programa(models.Model):
     nombre = models.CharField(max_length=60)
     dependencia = models.ForeignKey("Dependencia", on_delete=models.PROTECT)
-    tipo = models.CharField(max_length=3, choices=TIPOS, default="PRE")
+    tipo = models.CharField(max_length=3, choices=TIPOS, default="pre")
 
     def __str__(self):
         return self.nombre
 
     class Meta:
+        db_table = "Programa"
         permissions = [
-            ("programa", "Puede descargar reportes del programa."),
+            ("programa", "Puede descargar reportes.")
         ]

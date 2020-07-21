@@ -15,4 +15,5 @@ class Acta(models.Model):
         return self.año + "-" + self.número
 
     class Meta:
+        db_table = "Acta"
         permissions = []
