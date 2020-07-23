@@ -12,8 +12,9 @@ class Acta(models.Model):
         ])
 
     def __str__(self):
-        return self.año + "-" + self.número
+        return str(self.año) + "-" + str(self.número)
 
     class Meta:
+        unique_together = (("año", "número"),)
         db_table = "Acta"
         permissions = []

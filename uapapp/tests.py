@@ -2,21 +2,20 @@ from django.test import TestCase
 from django_seed import Seed
 from uapapp.models import Dependencia, Programa
 
-class Seeding(TestCase):
+#Seed each model with faker: python manage.py seed uapapp --number=20
 
-    dependencias = ["Área curricular de ingniería civil y agrícola",
-                    "Área curricular de ingniería química y ambiental", 
-                    "Área curricular de ingniería mecánica y mecatrónica", 
-                    "Área curricular de ingniería eléctrica y electrónica",
-                    "Área curricular de ingniería sistemas e industrial",
+class Seeding(TestCase):
+    dependencias = ["Área curricular de ingeniería civil y agrícola",
+                    "Área curricular de ingeniería química y ambiental", 
+                    "Área curricular de ingeniería mecánica y mecatrónica", 
+                    "Área curricular de ingeniería eléctrica y electrónica",
+                    "Área curricular de ingeniería sistemas e industrial",
                     ]
 
     seeder = Seed.seeder()
 
     for entry in dependencias:
-        print(entry)
         seeder.add_entity(Dependencia, 1, {
             'nombre': entry
         })
-
-    seeder.execute()
+        seeder.execute()

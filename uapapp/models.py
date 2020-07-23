@@ -6,7 +6,7 @@ TIPOS = [
 ]
 
 class Dependencia(models.Model):
-    nombre = models.CharField(max_length=60)
+    nombre = models.CharField(max_length=60, unique=True)
 
     def __str__(self):
         return self.nombre
@@ -20,7 +20,7 @@ class Dependencia(models.Model):
 
 
 class Programa(models.Model):
-    nombre = models.CharField(max_length=60)
+    nombre = models.CharField(max_length=60, unique=True)
     dependencia = models.ForeignKey("Dependencia", on_delete=models.PROTECT)
     tipo = models.CharField(max_length=3, choices=TIPOS, default="pre")
 
