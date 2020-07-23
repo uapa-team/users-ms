@@ -3,3 +3,4 @@ django-seed
 django-auth-ldap
 djangorestframework
 djangorestframework-simplejwt
+mysqlclient
