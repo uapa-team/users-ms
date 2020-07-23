@@ -2,3 +2,4 @@ Django
 django-auth-ldap
 djangorestframework
 djangorestframework-simplejwt
+mysqlclient
