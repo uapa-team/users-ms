@@ -5,6 +5,7 @@ from uapapp.models import Dependencia, Programa
 #Seed each model with faker: python manage.py seed uapapp --number=20
 
 class Seeding(TestCase):
+
     dependencias = ["Área curricular de ingeniería civil y agrícola",
                     "Área curricular de ingeniería química y ambiental", 
                     "Área curricular de ingeniería mecánica y mecatrónica", 

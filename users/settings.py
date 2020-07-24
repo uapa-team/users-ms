@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import sys
 import ldap
 from django_auth_ldap.config import LDAPSearch, LDAPSearchUnion
 
@@ -133,6 +134,17 @@ DATABASES = {
         'PASSWORD': DB_PASS,
     }
 }
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME':    'test_db',
+        },
+    }
+    AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
 
 
 # Password validation
