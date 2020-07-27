@@ -1,0 +1,30 @@
+name: User Microservice
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip isntall -r requeriments.txt
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Migrate for testing
+      run: |
+        python manage.py migrate --database testango
+        python manage.py loaddata users/fixtures/data.json --database test
+    - name: Test with Django test
+      run: |
+        python3 manage.py test
+        
