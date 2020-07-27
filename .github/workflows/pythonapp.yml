@@ -23,7 +23,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Migrate for testing
       run: |
-        python manage.py migrate --database testango
+        python manage.py migrate --database test
         python manage.py loaddata users/fixtures/data.json --database test
     - name: Test with Django test
       run: |
