@@ -141,6 +141,10 @@ if 'test' in sys.argv:
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME':    'test_db',
         },
+        'test': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME':    'test_db',
+        },
     }
     AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
