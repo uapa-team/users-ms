@@ -109,3 +109,6 @@ venv.bak/
 # Certificate LDAP
 
 certificate.pem
+
+#test db
+test_db
