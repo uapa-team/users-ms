@@ -1,4 +1,7 @@
 from django.db import models
+from django.db import models
+from django.contrib.auth.models import User
+    
 
 TIPOS = [
     ("pre", "Pregrado"),
@@ -32,3 +35,7 @@ class Programa(models.Model):
         permissions = [
             ("programa", "Puede descargar reportes.")
         ]
+
+class UsuarioDependencia(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    dependencia = models.ForeignKey(Dependencia, on_delete=models.CASCADE)

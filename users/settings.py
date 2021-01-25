@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'actas',
 
     #Django added apps:
-    'django_seed',
+    # 'django_seed',
 
     #Django default apps:
     'django.contrib.admin',
