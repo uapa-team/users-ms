@@ -23,7 +23,8 @@ class Dependencia(models.Model):
 
 
 class Programa(models.Model):
-    nombre = models.CharField(max_length=60, unique=True)
+    nombre = models.CharField(max_length=255, unique=True)
+    codigo = models.IntegerField(default=0)
     dependencia = models.ForeignKey("Dependencia", on_delete=models.PROTECT)
     tipo = models.CharField(max_length=3, choices=TIPOS, default="pre")
 
