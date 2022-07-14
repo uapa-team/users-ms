@@ -12,8 +12,15 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import sys
+from datetime import timedelta
+
+import environ
 import ldap
 from django_auth_ldap.config import LDAPSearch, LDAPSearchUnion
+
+# Environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 ldap.set_option(ldap.OPT_X_TLS_CACERTFILE, os.getcwd() + "/certificate.pem")
 
@@ -25,24 +32,29 @@ LOGGING = {
 }
 ldap.set_option(ldap.OPT_DEBUG_LEVEL, 4095)
 
-AUTH_LDAP_SERVER_URI = os.environ.get('LDAP_HOST')
+AUTH_LDAP_SERVER_URI = env('LDAP_HOST')
 AUTH_LDAP_USER_SEARCH = LDAPSearchUnion(
     LDAPSearch("ou=people,o=unal.edu.co",
-               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+            ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
     LDAPSearch("ou=institucional,o=bogota,o=unal.edu.co",
-               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+            ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
     LDAPSearch("ou=dependencia,o=bogota,o=unal.edu.co",
-               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+            ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
     LDAPSearch("ou=Institucional,o=bogota,o=unal.edu.co",
-               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+            ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
     LDAPSearch("ou=Dependencia,o=bogota,o=unal.edu.co",
-               ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
+            ldap.SCOPE_SUBTREE, "(uid=%(user)s)"),
 )
 
 AUTH_LDAP_ALWAYS_UPDATE_USER = False
 AUTHENTICATION_BACKENDS = (
     'django_auth_ldap.backend.LDAPBackend',
 )
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=1),
+}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,7 +63,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$0&m3i+7nha19j!+dscbtsltazal#icym5j5af%mjcu#z6&d_o'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -63,8 +75,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #Project apps:
-    'uapapp',
-    'actas',
+    'uapapp.apps.UapappConfig',
+    'actas.apps.ActasConfig',
 
     #Django added apps:
     # 'django_seed',
@@ -118,20 +130,14 @@ WSGI_APPLICATION = 'users.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DB_HOST = os.environ.get('USERS_DB_HOST')
-DB_PORT = os.environ.get('USERS_DB_PORT')
-DB_NAME = os.environ.get('USERS_DB_NAME')
-DB_USER = os.environ.get('USERS_DB_USER')
-DB_PASS = os.environ.get('USERS_DB_PASS')
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST':     DB_HOST,
-        'PORT':     DB_PORT,
-        'NAME':     DB_NAME,
-        'USER':     DB_USER,
-        'PASSWORD': DB_PASS,
+        'HOST':     env('USERS_DB_HOST'),
+        'PORT':     env('USERS_DB_PORT'),
+        'NAME':     env('USERS_DB_NAME'),
+        'USER':     env('USERS_DB_USER'),
+        'PASSWORD': env('USERS_DB_PASS'),
     }
 }
 

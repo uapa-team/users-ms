@@ -1,9 +1,9 @@
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.models import Permission
 from django.db.models import Q
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-from uapapp.models import UsuarioDependencia, Programa
+from uapapp.models import Programa, UsuarioDependencia
 
 
 class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -29,7 +29,7 @@ class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
         )
 
         token['uapapp'] = {
-            'programs': [(p.codigo, p.nombre) for p in uapapp_programs]
+            'programs': [(p.codigo, 1 if p.tipo == 'pre' else 0, p.nombre) for p in uapapp_programs]
         }
 
         return token

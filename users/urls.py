@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
+
 from .jwt_customization.userToken import UserTokenObtainPairView
 
 urlpatterns = [

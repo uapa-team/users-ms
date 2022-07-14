@@ -1,7 +1,5 @@
-from django.db import models
-from django.db import models
 from django.contrib.auth.models import User
-    
+from django.db import models
 
 TIPOS = [
     ("pre", "Pregrado"),
@@ -9,6 +7,7 @@ TIPOS = [
 ]
 
 class Dependencia(models.Model):
+    '''Modelo para la tabla Dependencia'''
     nombre = models.CharField(max_length=60, unique=True)
 
     def __str__(self):
@@ -21,8 +20,8 @@ class Dependencia(models.Model):
             ("pos", "Puede descargar reportes de posgrado.")
         ]
 
-
 class Programa(models.Model):
+    '''Modelo para la tabla Programa'''
     nombre = models.CharField(max_length=255, unique=True)
     codigo = models.IntegerField(default=0)
     dependencia = models.ForeignKey("Dependencia", on_delete=models.PROTECT)
@@ -38,5 +37,6 @@ class Programa(models.Model):
         ]
 
 class UsuarioDependencia(models.Model):
+    '''Modelo para la tabla UsuarioDependencia'''
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     dependencia = models.ForeignKey(Dependencia, on_delete=models.CASCADE)

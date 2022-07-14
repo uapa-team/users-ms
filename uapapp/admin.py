@@ -1,6 +1,7 @@
 from django.contrib import admin
-from uapapp.models import Dependencia, Programa, UsuarioDependencia
 from django.contrib.auth.models import Permission
+
+from uapapp.models import Dependencia, Programa, UsuarioDependencia
 
 admin.site.register(Permission)
 
