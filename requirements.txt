@@ -8,7 +8,6 @@ djangorestframework-simplejwt==5.2.0
 Faker==13.15.0
 isort==5.10.1
 mysqlclient==2.1.1
-pkg-resources==0.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 PyJWT==2.4.0
